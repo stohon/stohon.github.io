@@ -1,0 +1,13 @@
+body { font-family: Muli; font-size:13px; margin-left: 10%; margin-right: 10%; }
+h1 { font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:24px; font-weight: bold; }
+h2 { font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:20px; font-weight: bold; }
+h3 { font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:18px; font-weight: bold; margin-bottom:2px; }
+a { color:cornflowerblue; cursor:pointer; text-decoration: none; font-family: Muli; font-size:14px; }
+li a { color:red; cursor:pointer; text-decoration: none; font-family: Muli; font-size:14px; }
+a:hover { text-decoration: underline; font-family: Muli; font-size:14px; }
+ul { margin: 0px; border:0px; padding:0px;}
+ul, ol { margin-top:0.2em;margin-right:0px;margin-bottom:1em;margin-left:1.2em; }
+ul li { list-style: square; font-family: Muli; font-size:13px; }
+.blogHeader { padding-top: 15px; padding-bottom: 0px; }
+.blogTitle { font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:36px; font-weight:bold; color:red; }
+.aboutMe { font-family: Muli; font-size:14px; font-weight:bold; padding-left:5px; padding-bottom:6px; color:blueviolet; cursor:pointer; }
