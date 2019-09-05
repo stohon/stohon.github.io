@@ -1,7 +1,7 @@
 
 var vue = new Vue({
     el: '#app',
-    data: { indexJSON: { "blogTitleHTML": "test123" }, postsJSON: {}, activePosts: [{"title": "", "html": ""}] },
+    data: { indexJSON: {}, postsJSON: {}, activePosts: [{"title": "", "html": ""}] },
     computed: {},
     methods: {
         loadSite: function () {
