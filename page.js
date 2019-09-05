@@ -31,7 +31,8 @@ var scriptloadCounter = 0;
 function callFunctionFromScript () {
     scriptloadCounter += 1;
     if (scriptloadCounter == 3) {
-        axios.get('index2.html').then(function (r) { loadPage(r.data, $("body").html()); });
+        //axios.get('index2.html').then(function (r) { loadPage(r.data, $("body").html()); });
+        $.get("index2.html", function (r) { alert(r); loadPage(r, $("body").html()); });
     }
 }
 
