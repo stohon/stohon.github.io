@@ -5,9 +5,9 @@ script.type = 'text/javascript';
 script.onload = function() {
     callFunctionFromScript();
 }
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js';
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js';
 head.appendChild(script);
 
 function callFunctionFromScript () {
-    //alert($("body").html());
+    alert($("body").html());
 }
