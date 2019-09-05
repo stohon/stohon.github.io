@@ -1,5 +1,5 @@
 
-$(document).ready(function () { page.load(); });
+//$(document).ready(function () { page.load(); });
 var page = {
     load: function () {
         this.vue = new Vue({
