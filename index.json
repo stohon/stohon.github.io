@@ -1,0 +1,13 @@
+{
+    "blogTitleHTML" : "Stohon's <span style='color:black;'>Blogs</span>",
+    "categories": [
+        "Azure",
+        "SQL Server"
+    ],
+    "pages": [
+        {
+            "name": "about me",
+            "url": "./pages/aboutme.html"
+        }
+    ]
+}
