@@ -1,30 +1,39 @@
 
 var head = document.getElementsByTagName('head')[0];
 
-function createHeaderScript (url, callbackfn) {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.onload = function() {
-        callbackfn();
-    }
-    script.src = url;
-    head.appendChild(script);
+var templateMaster = {
+        createElement:  function (name, callbackfunc) { 
+            var elem = document.createElement(name); 
+            elem.onload = callbackfunc; 
+            return elem; 
+        },
+        appendToHeader: function (elem) { 
+            document.getElementsByTagName('head')[0].appendChild(elem) 
+        },
+        createHeaderScript: function (url, callbackfunc) {
+            var script = this.createElement('script', callbackfunc);
+            script.type = 'text/javascript';
+            script.src = url;
+            this.appendToHeader(script);
+        },
+        createHeaderLink: function (url) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.onload = function() {
+                //alert();
+            }
+            link.href = url;
+            head.appendChild(link);
+        }
 }
 
-function createHeaderLink (url) {
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    // script.onload = function() {
-    //     callFunctionFromScript();
-    // }
-    link.href = url;
-    head.appendChild(link);
-}
 
-createHeaderLink('https://fonts.googleapis.com/css?family=Muli');
-createHeaderLink('index.css');
-createHeaderScript('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', callFunctionFromScript);
-createHeaderScript('https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js', callFunctionFromScript);
+
+
+templateMaster.createHeaderLink('https://fonts.googleapis.com/css?family=Muli');
+templateMaster.createHeaderLink('index.css');
+templateMaster.createHeaderScript('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js', callFunctionFromScript);
+templateMaster.createHeaderScript('https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js', callFunctionFromScript);
 
 var scriptloadCounter = 0;
 function callFunctionFromScript () {
@@ -37,7 +46,7 @@ function callFunctionFromScript () {
 
 function loadPage(template, pagehtml) {
     $("body").html(template);
-    createHeaderScript("index.js", vueAppLoaded);
+    templateMaster.createHeaderScript("index.js", vueAppLoaded);
 }
 
 function vueAppLoaded() { }
