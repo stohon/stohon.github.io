@@ -1,45 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head> 
-	    <title></title> 
-        <link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' /> 
-        <link href='index.css' rel='stylesheet' />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
-        <script src="index.js"></script>
-    </head>
-    <body>
-        <div id="app">
-            <div class="blogHeader">
-                <table cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td class="blogTitle" v-html="indexJSON.blogTitleHTML"></td>
-                        <td class="aboutMe" valign="bottom">about me</td>
-                    </tr>
-                </table>
-            </div>
-            <div>
-                <div style="width:80%; float:left;">
-                    <div v-for="(d,i,z) in activePosts">
-                        <pre v-html="d.html"></pre>
-                    </div>
-                </div>
-                <div style="width:20%; float:left;" valign="top">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li v-for="(d,i,z) in indexJSON.categories"><a href="#">{{d}}</a></li>
-                    </ul>
-                    <h3>Pages</h3>
-                    <ul>
-                        <li><a href="#">line 1</a></li>
-                    </ul>
-                    <h3>Archives</h3>
-                    <ul>
-                        <li><a href="#">line 1</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+<script src="page.js"></script>
+<h1>Welcome to my blog!</h1>
+<p>
+    this is it
+</p>
