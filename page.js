@@ -1,6 +1,4 @@
 
-var head = document.getElementsByTagName('head')[0];
-
 var templateMaster = {
         createElement:  function (name, callbackfunc) { 
             var elem = document.createElement(name); 
@@ -16,19 +14,13 @@ var templateMaster = {
             script.src = url;
             this.appendToHeader(script);
         },
-        createHeaderLink: function (url) {
-            var link = document.createElement('link');
+        createHeaderLink: function (url, callbackfunc) {
+            var link = this.createElement('link', callbackfunc);
             link.rel = 'stylesheet';
-            link.onload = function() {
-                //alert();
-            }
             link.href = url;
-            head.appendChild(link);
+            this.appendToHeader(link);
         }
 }
-
-
-
 
 templateMaster.createHeaderLink('https://fonts.googleapis.com/css?family=Muli');
 templateMaster.createHeaderLink('index.css');
