@@ -9,7 +9,7 @@ var vue = new Vue({
             $.get('posts.json', this.postsLoaded);
             this.loadPost();
         },
-        indexLoaded: function(data, status) { alert(data); this.indexJSON = JSON.parse(data); },
+        indexLoaded: function(data, status) { alert(data); this.indexJSON = data; },
         postsLoaded: function(data, status) { this.postsJSON = JSON.parse(data); },
         loadPost: function() { $.get('posts/LinuxGuacamole/post.html', this.postLoaded); },
         postLoaded: function(data, status) { 
