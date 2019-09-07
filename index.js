@@ -7,7 +7,7 @@ var vue = new Vue({
         loadSite: function () {
             $.get('index.json', this.indexLoaded);
             $.get('posts.json', this.postsLoaded);
-            this.loadPost();
+            //this.loadPost();
         },
         indexLoaded: function(data, status) { if (typeof(data) == "object") { this.indexJSON = data; } else { this.indexJSON = JSON.parse(data); } },
         postsLoaded: function(data, status) { this.postsJSON = JSON.parse(data); },

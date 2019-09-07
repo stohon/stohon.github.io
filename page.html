@@ -1,5 +1,15 @@
 <script src="page.js"></script>
-<h1>My test</h1>
-<p>
-    testing23
-</p>w
+<h1>Installing Guacamole on Linux HTML5  Remote Access</h1>
+<p>After guac-install.sh runs it will display the URL and default admin account. guacadmin:guacadmin and http://localhost:8080/guacamole.</p>
+<p>Now that guacamole is setup you will need to connect to it using port 8080. Go back into portal.azure.com and remove the inbound SSH 22 port and add port 8080. 
+    With port 8080 open you can now hit the guacamole site.</p>
+<p>Use your DNS name or IP address to connect to the guacamole site. You should be prompted with a login screen, enter the default username and password. Update the password in settings. Also from settings click on the Connections tab and add a new connection.</p>
+<p>To setup a RDP connection enter in the Name and select RDP for the connection.</p>
+<p><img class="alignnone size-full wp-image-243" src="http://stohon.com/wp-content/uploads/2018/08/EditRDPConnection.png" alt="" width="308" height="145" srcset="http://stohon.com/wp-content/uploads/2018/08/EditRDPConnection.png 308w, http://stohon.com/wp-content/uploads/2018/08/EditRDPConnection-300x141.png 300w, http://stohon.com/wp-content/uploads/2018/08/EditRDPConnection-250x118.png 250w" sizes="(max-width: 308px) 100vw, 308px" /></p>
+<p>Next scroll down to Parameters. Enter localhost for the Hostname. If you have more than one machine on the local network (in Azure virtual network) you could use this instance of guacamole to connect to each machine by creating a connection for each and providing the local machine address for hostname. Since this is a stand alone install and we want to RDP into the same server we&#8217;ll use localhost. Set RDP port to 3389, this is the default RDP port for xrdp.</p>
+<p>Enter in the VMs Username and password under authentication. This is optional. If you don&#8217;t provide it here then you will be prompted by the OS when RDPing in. If you do provide it you will be automatically logged into the OS. Click save.</p>
+<p><img class="alignnone size-full wp-image-244" src="http://stohon.com/wp-content/uploads/2018/08/RDPParameters.png" alt="" width="516" height="375" srcset="http://stohon.com/wp-content/uploads/2018/08/RDPParameters.png 516w, http://stohon.com/wp-content/uploads/2018/08/RDPParameters-300x218.png 300w, http://stohon.com/wp-content/uploads/2018/08/RDPParameters-250x182.png 250w" sizes="(max-width: 516px) 100vw, 516px" /></p>
+<p>Navigate to the Home page and double click the connection to log in.</p>
+<p>If you receive error messages logging in, try different browsers. I have had issues on different machines with Chrome and IE. Firefox always seems to work.</p>
+<p>Some quick tips: if you want full screen RDPing, try Shift &#8211; Alt &#8211; Enter or F11 to make your browser full screen. If you want to cut and paste between your VM and local machine use Control &#8211; Alt &#8211; Shift to get the left menu which will allow you to paste or cut text through the browser, it will also show a menu drop down for other features.</p>
+<p>Enjoy!</p>

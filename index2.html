@@ -8,12 +8,12 @@
         </table>
     </div>
     <div>
-        <div style="width:80%; float:left;">
+        <div id="pageContent" style="width:75%; float:left;padding-bottom:15px;">
             <div v-for="(d,i,z) in activePosts">
                 <pre v-html="d.html"></pre>
             </div>
         </div>
-        <div style="width:20%; float:left;" valign="top">
+        <div style="width:20%; float:left;padding-left:25px;" valign="top">
             <h3>Categories</h3>
             <ul>
                 <li v-for="(d,i,z) in indexJSON.categories"><a href="#">{{d}}</a></li>
@@ -22,10 +22,7 @@
             <ul>
                 <li><a href="#">line 1</a></li>
             </ul>
-            <h3>Archives</h3>
-            <ul>
-                <li><a href="#">line 1</a></li>
-            </ul>
         </div>
     </div>
+    <div class="footer" v-html="indexJSON.blogFooterHTML"></div>
 </div>

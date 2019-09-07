@@ -1,7 +1,15 @@
 {
     "blogTitleHTML" : "Stohon's <span style='color:black;'>Blogs</span>",
+    "blogFooterHTML" : "Copyright © Stohon's Blogs - Hosted with Simple Static HTML Blog Templates",
     "categories": [
+        "Active Directory",
+        "AngularJS",
+        "ASP.NET",
         "Azure",
+        "C#",
+        "Javascript",
+        "JQuery",
+        "MS LogParser",
         "SQL Server"
     ],
     "pages": [
