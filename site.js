@@ -20,12 +20,14 @@ for(i=0; i < siteData.header.length; i++) {
     switch (eT) {
         case 'link':   el.rel = 'stylesheet';       el.href = eU; break;
         case 'script': el.type = 'text/javascript'; el.src  = eU;  break; } 
-    el.onload = function() { 
-        if (++onloadCount == siteData.header.length) { 
-            $.get(siteData.getRelativeURL("{rootURL}/site.html"), function (data) { 
-                siteData.content = $("body").html();
-                $("body").html(data);
-                if (typeof pageLoaded === "function") pageLoaded();
-                var vue = new Vue({ el: '#app', data: { d: siteData } }); }); }};
+    el.onload = function() { if (++onloadCount == siteData.header.length) { headerLoaded(); }};
     document.getElementsByTagName('head')[0].appendChild(el);
+}
+
+function headerLoaded() {
+    $.get(siteData.getRelativeURL("{rootURL}/site.html"), function (data) { 
+        siteData.content = $("body").html();
+        $("body").html(data);
+        if (typeof pageLoaded === "function") pageLoaded();
+        var vue = new Vue({ el: '#app', data: { d: siteData } }); });
 }
