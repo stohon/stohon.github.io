@@ -1,3 +1,15 @@
+var siteData = {
+    "header": [{"type":"link", "url":"https://fonts.googleapis.com/css?family=Muli"},
+               {"type":"link","url":"index.css"},
+               {"type":"script","url":"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
+               {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"}],
+    "blogTitleHTML" : "Stohon's <span style='color:black;'>Blogs</span>",
+    "blogFooterHTML" : "Copyright © Stohon's Blogs - Hosted with Simple Static HTML Blog Templates",
+    "categories": ["Active Directory","AngularJS","ASP.NET","Azure","C#",
+                   "Javascript","JQuery","MS LogParser","SQL Server"],
+    "pages": [{ "name": "about me", "url": "./pages/aboutme.html" }]
+};
+
 var headers = {
     totalElements: 0, itemLoadCount: 0,
     createElement:  function (name) { 
@@ -39,11 +51,11 @@ function loadPage(template) {
     if (typeof pageLoaded === "function") pageLoaded();
     var vue = new Vue({
         el: '#app',
-        data: { indexJSON: {} },
+        data: { indexJSON: siteData },
         methods: {
             indexLoaded: function(data) { if (typeof(data) == "object") { this.indexJSON = data; } else { this.indexJSON = JSON.parse(data); } }
         },
-        created: function () { $.get('index.json', this.indexLoaded); },
+        //created: function () { $.get('index.json', this.indexLoaded); },
         updated: function () { if (typeof vueUpdated === "function") vueUpdated(); }
     });
 }
