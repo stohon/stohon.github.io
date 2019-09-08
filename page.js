@@ -26,23 +26,24 @@ var headers = {
     loaded: null 
 }
 
-headers.loaded = function () { $.get("index2.html", function (data, status) { loadPage(data, $("body").html()); }); };
+headers.loaded = function () { $.get("index2.html", function (data, status) { loadPage(data); }); };
 headers.loadElements([{"type":"link", "url":"https://fonts.googleapis.com/css?family=Muli"},
                       {"type":"link","url":"index.css"},
                       {"type":"script","url":"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"}]);
 
-function loadPage(template, pagehtml) {
+function loadPage(template) {
+    var pagehtml = $("body").html();
     $("body").html(template);
     $("#pageContent").html(pagehtml);
-    //headers.createScript("index.js", vueAppLoaded);
+    if (typeof pageLoaded === "function") pageLoaded();
     var vue = new Vue({
         el: '#app',
         data: { indexJSON: {} },
         methods: {
-            loadSite: function () { $.get('index.json', this.indexLoaded); },
-            indexLoaded: function(data, status) { if (typeof(data) == "object") { this.indexJSON = data; } else { this.indexJSON = JSON.parse(data); } }
+            indexLoaded: function(data) { if (typeof(data) == "object") { this.indexJSON = data; } else { this.indexJSON = JSON.parse(data); } }
         },
-        created: function () { this.loadSite(); }
+        created: function () { $.get('index.json', this.indexLoaded); },
+        updated: function () { if (typeof vueUpdated === "function") vueUpdated(); }
     });
 }
