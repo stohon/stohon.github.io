@@ -1,7 +1,7 @@
 <div id="app">
-    <div class="header" v-html="d.siteTitle"></div>
+    <a v-bind:href="d.rootURL + '/index.html'"><div class="header" v-html="d.siteTitle"></div></a>
     <div>
-        <div class="content" v-html="d.content"></div>
+        <div id="content" class="content" ></div>
         <div class="menu" valign="top">
             <h3>Pages</h3>
             <ul><li v-for="(v,i,z) in d.pages"><a href="#">{{v.name}}</a></li></ul>

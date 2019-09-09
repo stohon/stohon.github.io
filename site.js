@@ -14,20 +14,33 @@ var siteData = {
 
 var onloadCount = 0;
 for(i=0; i < siteData.header.length; i++) {
-    eT = siteData.header[i].type;
-    eU = siteData.getRelativeURL(siteData.header[i].url); 
-    el = document.createElement(eT);
-    switch (eT) {
-        case 'link':   el.rel = 'stylesheet';       el.href = eU; break;
-        case 'script': el.type = 'text/javascript'; el.src  = eU;  break; } 
+    el = document.createElement(siteData.header[i].type);
+    switch (siteData.header[i].type) {
+        case 'link':   
+            el.rel = 'stylesheet';
+            el.href = siteData.getRelativeURL(siteData.header[i].url); 
+            break;
+        case 'script': 
+            el.type = 'text/javascript'; 
+            el.src  = siteData.getRelativeURL(siteData.header[i].url);  
+            break; 
+    } 
     el.onload = function() { if (++onloadCount == siteData.header.length) { headerLoaded(); }};
     document.getElementsByTagName('head')[0].appendChild(el);
 }
 
 function headerLoaded() {
     $.get(siteData.getRelativeURL("{rootURL}/site.html"), function (data) { 
-        siteData.content = $("body").html();
+        var pageContent = $("body").html();
+        $("body").hide();
         $("body").html(data);
-        if (typeof pageLoaded === "function") pageLoaded();
-        var vue = new Vue({ el: '#app', data: { d: siteData } }); });
+        $("#content").html(pageContent);
+        (typeof pageLoad === "function") ? pageLoad(createVue) : createVue();
+    });
+}
+
+function createVue() {
+    $("#pageContent").show();
+    var vue = new Vue({ el: '#app', data: { d: siteData } });
+    $("body").show();
 }

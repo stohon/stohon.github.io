@@ -1,9 +1,18 @@
 <script src="site.js"></script>
 <script>
-    // function pageLoaded() { alert("page loaded"); }
-    // function vueUpdated() { alert("vue updated") }
+    function pageLoad(loadCompleteCallback) { 
+        $.get("posts.json", function(data) { 
+            siteData.posts = JSON.parse(data); 
+            loadCompleteCallback(); 
+        })
+     }
 </script>
-<h1>Welcome to my blog!</h1>
-<p>
-    this is it
-</p>
+<div id="pageContent" style="display:none;">
+    <div v-for="(v,i,z) in d.posts">
+        <h1><a v-bind:href="v.url">{{v.name}}</a></h1>
+        <p>
+            this is it
+        </p>
+    </div>
+</div>
+
