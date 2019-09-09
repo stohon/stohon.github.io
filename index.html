@@ -2,7 +2,7 @@
 <script>
     function pageLoad(loadCompleteCallback) { 
         $.get("posts.json", function(data) { 
-            siteData.posts = JSON.parse(data); 
+            siteData.posts = (typeof data === "object") ? data : JSON.parse(data); 
             loadCompleteCallback(); 
         })
      }
