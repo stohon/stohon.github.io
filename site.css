@@ -12,4 +12,5 @@ pre { font-family: Muli; font-size:14px; }
 .header { padding-top: 15px; padding-bottom: 15px; font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:3.2em; font-weight:bold; color:red; letter-spacing: -0.05em; text-shadow: 1px 1px 0px rgba(0,0,0,0.3); }
 .footer { clear:left;width:100%;text-align:center;padding:25px;border-top:1px solid #dadada; }
 .content { width:75%; float:left;padding-bottom:15px; }
+#pageContent { display:none; }
 .menu { width:20%; float:left;padding-left:35px; }
