@@ -2,17 +2,23 @@
 <script>
     function pageLoad(loadCompleteCallback) { 
         $.get("posts.json", function(data) { 
-            siteData.posts = (typeof data === "object") ? data : JSON.parse(data); 
+            categoryVal = siteData.getQSCategory();
+            data = (typeof data === "object") ? data : JSON.parse(data);
+            if (categoryVal != undefined) {
+                data = $.grep(data, function(n,i) { return n.categories.split(',').includes(categoryVal); });
+            }
+            siteData.posts = data;
             loadCompleteCallback(); 
-        })
+        });
+     }
+     function vueLoaded() {
+         $("[loadurl]").each(function (i,e) { $(e).load($(e).attr("loadurl")); } )
      }
 </script>
 <div id="pageContent">
     <div v-for="(v,i,z) in d.posts">
+        <div v-bind:loadurl="v.url"></div>
         <h1><a v-bind:href="v.url">{{v.name}}</a></h1>
-        <p>
-            this is it
-        </p>
+        <p></p>
     </div>
 </div>
-
