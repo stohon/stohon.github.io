@@ -7,7 +7,8 @@ function pageLoad(loadCompleteCallback) { loadCompleteCallback(); }
 <p>After guac-install.sh runs it will display the URL and default admin account. guacadmin:guacadmin and http://localhost:8080/guacamole.</p>
 <p>Now that guacamole is setup you will need to connect to it using port 8080. Go back into portal.azure.com and remove the inbound SSH 22 port and add port 8080. 
     With port 8080 open you can now hit the guacamole site.</p>
-<pre><code class="cs" >// fonction pour créer un objet date
+<pre><code class="cs" style="height:200px;">
+// fonction pour créer un objet date
 using System.test
 #test 
 //test
@@ -20,7 +21,9 @@ public class tester() {
 
 function gjsCreerObjetDate(jour, mois, annee) {
     return new Date(annee, mois - 1, jour);
-}</code></pre>
+}
+
+</code></pre>
 <p>Use your DNS name or IP address to connect to the guacamole site. You should be prompted with a login screen, enter the default username and password. Update the 
     password in settings. Also from settings click on the Connections tab and add a new connection.</p>
 <p>To setup a RDP connection enter in the Name and select RDP for the connection.</p>

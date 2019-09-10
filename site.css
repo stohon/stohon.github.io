@@ -8,8 +8,9 @@ ul { margin: 0px; border:0px; padding:0px;}
 ul, ol { margin-top:0.2em;margin-right:0px;margin-bottom:1em;margin-left:1.2em; }
 ul li { list-style: square; font-family: Muli; font-size:16px; padding-bottom:2px; }
 p { text-align: justify; }
-pre { font-family: Muli; font-size:14px; }
-.header { padding-top: 15px; padding-bottom: 15px; font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:3.2em; font-weight:bold; color:red; letter-spacing: -0.05em; text-shadow: 1px 1px 0px rgba(0,0,0,0.3); }
+pre { font-family: Muli; font-size:14px; overflow: auto; border:1px solid #dadada; }
+.header { padding-top: 15px; padding-bottom: 15px; font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; 
+          font-size:3.2em; font-weight:bold; color:red; letter-spacing: -0.05em; text-shadow: 1px 1px 0px rgba(0,0,0,0.3); }
 .footer { clear:left;width:100%;text-align:center;padding:25px;border-top:1px solid #dadada; }
 .content { width:75%; float:left;padding-bottom:15px; }
 #pageContent { display:none; }
