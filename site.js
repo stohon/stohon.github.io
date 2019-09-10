@@ -1,6 +1,3 @@
-{/* <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/googlecode.min.css">
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script> */}
-
 var siteData = {
     "rootURL"       : location.href.split('stohon.github.io')[0] + "stohon.github.io",
     "header"        : [{"type":"link",  "url":"https://fonts.googleapis.com/css?family=Muli"},
