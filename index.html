@@ -6,16 +6,22 @@
             data = (typeof data === "object") ? data : JSON.parse(data);
             if (categoryVal != undefined) {
                 data = $.grep(data, function(n,i) { return n.categories.split(',').includes(categoryVal); });
+
+                
             }
 
-            $.get(data[0].url, function (pagedata) { 
-                data[0].myhtml = pagedata; alert(data[0].myhtml)  
-                siteData.posts = data;
-            loadCompleteCallback();
-            } );
+            if (data.length > 0) {
+                $.get(data[0].url, function (pagedata) { 
+                    data[0].myhtml = pagedata.replace("pageContent", ""); 
+                    siteData.posts = data;
+                    loadCompleteCallback();
+                });
+            }
+            else {
+                loadCompleteCallback();
+            }
 
             
-            //setTimeout(loadCompleteCallback,1000); 
         });
      }
      function vueLoaded() {
@@ -26,6 +32,6 @@
 </script>
 <div id="pageContent">
     <div v-for="(v,i,z) in d.posts">
-        {{i}}<div v-html="v.myhtml"></div>
+        <div v-html="v.myhtml"></div>
     </div>
 </div>
