@@ -7,18 +7,25 @@
             if (categoryVal != undefined) {
                 data = $.grep(data, function(n,i) { return n.categories.split(',').includes(categoryVal); });
             }
-            siteData.posts = data;
-            loadCompleteCallback(); 
+
+            $.get(data[0].url, function (pagedata) { 
+                data[0].myhtml = pagedata; alert(data[0].myhtml)  
+                siteData.posts = data;
+            loadCompleteCallback();
+            } );
+
+            
+            //setTimeout(loadCompleteCallback,1000); 
         });
      }
      function vueLoaded() {
-         $("[loadurl]").each(function (i,e) { $(e).load($(e).attr("loadurl") + "?norun=true"); } )
+         $("[loadurl]").each(function (i,e) { 
+            
+          });
      }
 </script>
 <div id="pageContent">
     <div v-for="(v,i,z) in d.posts">
-        <div v-bind:loadurl="v.url"></div>
-        <h1><a v-bind:href="v.url">{{v.name}}</a></h1>
-        <p></p>
+        {{i}}<div v-html="v.myhtml"></div>
     </div>
 </div>

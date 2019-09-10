@@ -23,27 +23,24 @@ var siteData = {
                         }
                         return vars; 
                     },
-    getQSCategory   : function () { return siteData.getUrlVars()["category"] },
-    getQSNoRun      : function () { return siteData.getUrlVars()["norun"] }
+    getQSCategory   : function () { return siteData.getUrlVars()["category"] }
 };
 
-if (siteData.getQSNoRun() == undefined) {
-    var onloadCount = 0;
-    for(i=0; i < siteData.header.length; i++) {
-        el = document.createElement(siteData.header[i].type);
-        switch (siteData.header[i].type) {
-            case 'link':   
-                el.rel = 'stylesheet';
-                el.href = siteData.getRelativeURL(siteData.header[i].url); 
-                break;
-            case 'script': 
-                el.type = 'text/javascript'; 
-                el.src  = siteData.getRelativeURL(siteData.header[i].url);  
-                break; 
-        } 
-        el.onload = function() { if (++onloadCount == siteData.header.length) { headerLoaded(); }};
-        document.getElementsByTagName('head')[0].appendChild(el);
-    }
+var onloadCount = 0;
+for(i=0; i < siteData.header.length; i++) {
+    el = document.createElement(siteData.header[i].type);
+    switch (siteData.header[i].type) {
+        case 'link':   
+            el.rel = 'stylesheet';
+            el.href = siteData.getRelativeURL(siteData.header[i].url); 
+            break;
+        case 'script': 
+            el.type = 'text/javascript'; 
+            el.src  = siteData.getRelativeURL(siteData.header[i].url);  
+            break; 
+    } 
+    el.onload = function() { if (++onloadCount == siteData.header.length) { headerLoaded(); }};
+    document.getElementsByTagName('head')[0].appendChild(el);
 }
 
 function headerLoaded() {
