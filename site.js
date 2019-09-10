@@ -5,8 +5,7 @@ var siteData = {
                        {"type":"link",  "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs.min.css"},
                        {"type":"script","url":"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
                        {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"},
-                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"},
-                       {"type":"script","url":"{rootURL}/includes/highlighter.js"}],
+                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"}],
     "siteTitle"     : "Stohon's <span style='color:black;'>Blogs</span>",
     "siteFooter"    : "Copyright - Stohon's Blogs - Hosted with Simple HTML Blog",
     "categories"    : ["Active Directory","AngularJS","ASP.NET","Azure","C#",
@@ -45,5 +44,6 @@ function headerLoaded() {
 function createVue() {
     $("#pageContent").show();
     var vue = new Vue({ el: '#app', data: { d: siteData } });
+    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
     $("body").show();
 }
