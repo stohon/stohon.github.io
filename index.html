@@ -12,7 +12,7 @@
         });
      }
      function vueLoaded() {
-         $("[loadurl]").each(function (i,e) { $(e).load($(e).attr("loadurl")); } )
+         $("[loadurl]").each(function (i,e) { $(e).load($(e).attr("loadurl") + "?norun=true"); } )
      }
 </script>
 <div id="pageContent">
