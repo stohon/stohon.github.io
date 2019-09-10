@@ -1,9 +1,15 @@
+{/* <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/styles/googlecode.min.css">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script> */}
+
 var siteData = {
     "rootURL"       : location.href.split('stohon.github.io')[0] + "stohon.github.io",
     "header"        : [{"type":"link",  "url":"https://fonts.googleapis.com/css?family=Muli"},
                        {"type":"link",  "url": "{rootURL}/site.css"},
+                       {"type":"link",  "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs.min.css"},
                        {"type":"script","url":"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
-                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"}],
+                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"},
+                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"},
+                       {"type":"script","url":"{rootURL}/includes/highlighter.js"}],
     "siteTitle"     : "Stohon's <span style='color:black;'>Blogs</span>",
     "siteFooter"    : "Copyright - Stohon's Blogs - Hosted with Simple HTML Blog",
     "categories"    : ["Active Directory","AngularJS","ASP.NET","Azure","C#",
