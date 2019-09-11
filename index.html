@@ -5,29 +5,30 @@
             categoryVal = siteData.getQSCategory();
             data = (typeof data === "object") ? data : JSON.parse(data);
             if (categoryVal != undefined) {
-                data = $.grep(data, function(n,i) { return n.categories.split(',').includes(categoryVal); });
+                data = $.grep(data, function(n,i) { return n.categories.replace(" ","").split(',').includes(decodeURIComponent(categoryVal).replace(" ", "")); });
             }
-
-            if (data.length > 0) {
-                $.get(data[0].url, function (pagedata) { 
-                    data[0].myhtml = pagedata.replace("pageContent", ""); 
-                    siteData.posts = data;
-                    loadCompleteCallback();
-                });
-            }
-            else {
-                loadCompleteCallback();
-            }
+            siteData.posts = data;
+            // load the whole page in the list view - not sure I want to implement it this way
+            // if (data.length > 0) {
+            //     $.get(data[0].url, function (pagedata) { 
+            //         data[0].myhtml = pagedata.replace("pageContent", "").replace("<h1>", "<h1><a href='" + data[0].url + "'>").replace("</h1>", "</a></h1>"); 
+            //         siteData.posts = data;
+            //         loadCompleteCallback();
+            //     });
+            // }
+            // else {
+            //     loadCompleteCallback();
+            // }
+            loadCompleteCallback();
         });
-     }
-     function vueLoaded() {
-         $("[loadurl]").each(function (i,e) { 
-            
-          });
+        
      }
 </script>
 <div id="pageContent">
     <div v-for="(v,i,z) in d.posts">
-        <div v-html="v.myhtml"></div>
+        <!-- <div v-html="v.myhtml"></div> -->
+        <h1><a v-bind:href="v.url">{{v.name}}</a></h1>
+        <div v-html="v.description"></div>
+        <div style="margin-bottom:15px;margin-top:8px;font-size:13px;color:#707070;font-weight:bold;">Posted on <span style="color:red;">{{v.postdate}}</span> by <span style="color:red;">{{v.author}}</span> in <span style="color:red;">{{v.categories}}</span></div>
     </div>
 </div>

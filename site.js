@@ -9,21 +9,17 @@ var siteData = {
     "siteTitle"     : "Stohon's <span style='color:black;'>Blogs</span>",
     "siteFooter"    : "Copyright - Stohon's Blogs - Hosted with Simple HTML Blog",
     "categories"    : ["Active Directory","AngularJS","ASP.NET","Azure","C#",
-                       "Javascript","JQuery","Linux","MS LogParser","SQL Server"],
+                       "Javascript","JQuery","Linux","MS LogParser","PowerShell","SQL Server"],
     "pages"         : [{ "name": "About Me", "url": "./pages/aboutme.html" }],
     getRelativeURL  : function (url) { return url.replace("{rootURL}", this.rootURL); },
     getUrlVars      : function () {
                         var vars = [], hash;
                         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
                         for(var i = 0; i < hashes.length; i++)
-                        {
-                            hash = hashes[i].split('=');
-                            vars.push(hash[0]);
-                            vars[hash[0]] = hash[1];
-                        }
+                        { hash = hashes[i].split('='); vars.push(hash[0]); vars[hash[0]] = hash[1]; }
                         return vars; 
                     },
-    getQSCategory   : function () { return siteData.getUrlVars()["category"] }
+    getQSCategory   : function () { return siteData.getUrlVars()["category"]; }
 };
 
 var onloadCount = 0;
@@ -58,5 +54,5 @@ function createVue() {
     var vue = new Vue({ el: '#app', data: { d: siteData } });
     $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
     $("body").show();
-    if (typeof vueLoaded === "function") vueLoaded();
+    //if (typeof vueLoaded === "function") vueLoaded();
 }
