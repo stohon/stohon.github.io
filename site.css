@@ -1,7 +1,7 @@
 body { font-family: Muli; font-size:15px; margin-left: 10%; margin-right: 10%; }
-h1 { font-family: Muli; font-size:22px; font-weight: bold; margin: 0px; }
-h2 { font-family: Muli; font-size:20px; font-weight: bold; margin: 0px; }
-h3 { font-family: Muli; font-size:18px; font-weight: bold; margin: 0px; margin-bottom:2px; }
+h1 { font-family: Muli; font-size:20px; font-weight: bold; margin: 0px; }
+h2 { font-family: Muli; font-size:18px; font-weight: bold; margin: 0px; }
+h3 { font-family: Muli; font-size:16px; font-weight: bold; margin: 0px; margin-bottom:2px; }
 a { color: #000000; cursor:pointer; text-decoration: none; font-family: Muli;  }
 h1 a:hover { color:#000000; cursor:pointer; text-decoration: underline; font-family: Muli; }
 li a { color:red; cursor:pointer; text-decoration: none; font-family: Muli; font-size:14px; }
