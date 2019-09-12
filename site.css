@@ -1,8 +1,9 @@
 body { font-family: Muli; font-size:15px; margin-left: 10%; margin-right: 10%; }
-h1 { font-family: Muli; font-size:26px; font-weight: bold; margin: 0px; }
-h2 { font-family: Muli; font-size:22px; font-weight: bold; margin: 0px; }
-h3 { font-family: Muli; font-size:19px; font-weight: bold; margin: 0px; margin-bottom:2px; }
-a { color:cornflowerblue; cursor:pointer; text-decoration: none; font-family: Muli;  }
+h1 { font-family: Muli; font-size:20px; font-weight: bold; margin: 0px; }
+h2 { font-family: Muli; font-size:18px; font-weight: bold; margin: 0px; }
+h3 { font-family: Muli; font-size:16px; font-weight: bold; margin: 0px; margin-bottom:2px; }
+a { color: #000000; cursor:pointer; text-decoration: none; font-family: Muli;  }
+h1 a:hover { color:#000000; cursor:pointer; text-decoration: underline; font-family: Muli; }
 li a { color:red; cursor:pointer; text-decoration: none; font-family: Muli; font-size:14px; }
 ul { margin: 0px; border:0px; padding:0px;}
 ul, ol { margin-top:0.2em;margin-right:0px;margin-bottom:1em;margin-left:1.2em; }
