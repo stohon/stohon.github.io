@@ -7,7 +7,6 @@
             if (categoryVal != undefined) {
                 data = $.grep(data, function(n,i) { return n.categories.replace(" ","").split(',').includes(decodeURIComponent(categoryVal).replace(" ", "")); });
             }
-
             var pageData = { "currentPage": 2, "totalPages": 3 }
             var vuePage = new Vue({ el: '#pageNavigation', data: { d: pageData } });
         
