@@ -13,9 +13,15 @@
                 data = $.grep(data, function(n,i) { return n.categories.replace(" ","").split(',').includes(decodeURIComponent(categoryVal).replace(" ", "")); });
             }
             
+            var postsPerPage = 1;
+            pageData.totalPages = Math.ceil(data.length / postsPerPage);
+            var startSlice = (pageData.currentPage == 1) ? 0 : (pageData.currentPage - 1) * postsPerPage;
+            data = data.slice(startSlice, startSlice + postsPerPage);
+
+            siteData.posts = data;
+
             var vuePage = new Vue({ el: '#pageNavigation', data: { d: pageData } });
         
-            siteData.posts = data;
             loadCompleteCallback();
         });
      }
