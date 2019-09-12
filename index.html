@@ -18,16 +18,17 @@
             else {
                 loadCompleteCallback();
             }
+
+            var pageData = { "currentPage": 1, "totalPages": 1 }
+            var vuePage = new Vue({ el: '#pageNavigation', data: { d: pageData } });
         });
-     }
-     function vueLoaded() {
-         $("[loadurl]").each(function (i,e) { 
-            
-          });
      }
 </script>
 <div id="pageContent">
     <div v-for="(v,i,z) in d.posts">
         <div v-html="v.myhtml"></div>
+    </div>
+    <div id="pageNavigation">
+        <input v-if="d.currentPage != 1" type="button" value="<< Previous"><span class="pageNumber">Page 1</span><input v-if="d.currentPage != d.totalPages" type="button" value="Next >>">
     </div>
 </div>

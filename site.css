@@ -15,3 +15,6 @@ pre { font-family: Muli; font-size:14px; overflow: auto; border:1px solid #dadad
 .content { width:75%; float:left;padding-bottom:15px; }
 #pageContent { display:none; }
 .menu { width:20%; float:left;padding-left:35px; }
+#pageNavigation { margin-top:25px; }
+input[type=button] { margin-right:10px;width:100px; font-size:14px;  }
+.pageNumber { margin-right:10px;color:#494949;font-size:14px; color:red; }
