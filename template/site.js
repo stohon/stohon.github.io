@@ -19,7 +19,8 @@ var siteData = {
                         { hash = hashes[i].split('='); vars.push(hash[0]); vars[hash[0]] = hash[1]; }
                         return vars; 
                     },
-    getQSCategory   : function () { return siteData.getUrlVars()["category"]; }
+    getQSCategory   : function () { return siteData.getUrlVars()["category"]; },
+    getQSPage       : function () { return siteData.getUrlVars()["page"]; }
 };
 
 var onloadCount = 0;

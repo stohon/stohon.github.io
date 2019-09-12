@@ -2,12 +2,17 @@
 <script>
     function pageLoad(loadCompleteCallback) { 
         $.get("posts.json", function(data) { 
+            var pageData = { "currentPage": 1, "totalPages": 1, "totalPosts": 0 }
+
             categoryVal = siteData.getQSCategory();
+            pageVal = siteData.getQSPage();
+            (pageVal == undefined) ? pageData.currentPage = 1 : pageData.currentPage = pageVal;
+
             data = (typeof data === "object") ? data : JSON.parse(data);
             if (categoryVal != undefined) {
                 data = $.grep(data, function(n,i) { return n.categories.replace(" ","").split(',').includes(decodeURIComponent(categoryVal).replace(" ", "")); });
             }
-            var pageData = { "currentPage": 2, "totalPages": 3 }
+            
             var vuePage = new Vue({ el: '#pageNavigation', data: { d: pageData } });
         
             siteData.posts = data;
