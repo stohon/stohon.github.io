@@ -2,7 +2,7 @@
 <script>
     function pageLoad(loadCompleteCallback) { 
         $.get("posts.json", function(data) { 
-            var pageData = { "currentPage": 1, "totalPages": 1, "totalPosts": 0 }
+            var pageData = { "currentPage": 1, "totalPages": 1, "totalPosts": 0, "previousLink": "", "nextLink": "" }
 
             categoryVal = siteData.getQSCategory();
             pageVal = siteData.getQSPage();
@@ -20,10 +20,28 @@
 
             siteData.posts = data;
 
+            pageData.previousLink = "index.html" + getPrevNavQueryString(pageData.currentPage, categoryVal);
+            pageData.nextLink = "index.html" + getNextNavQueryString(pageData.currentPage, categoryVal, pageData.totalPages);
             var vuePage = new Vue({ el: '#pageNavigation', data: { d: pageData } });
         
             loadCompleteCallback();
         });
+     }
+     function getPrevNavQueryString (page, cat) {
+        if (page == 1) {
+            return (cat == undefined) ? "" : "?category=" + cat;
+        }
+        else {
+            return (cat == undefined) ? "?page=" + (page - 1).toString() : "?page=" + (page - 1).toString() + "&category=" + cat;
+        }
+     }
+     function getNextNavQueryString (page, cat, totalPages) {
+        if (page == totalPages) {
+            return (cat == undefined) ? "" : "?category=" + cat;
+        }
+        else {
+            return (cat == undefined) ? "?page=" + (parseInt(page) + 1).toString() : "?page=" + (parseInt(page) + 1).toString() + "&category=" + cat;
+        }
      }
 </script>
 <div id="pageContent">
@@ -33,6 +51,8 @@
         <div style="margin-bottom:15px;margin-top:8px;font-size:13px;color:#707070;font-weight:bold;">Posted on <span style="color:red;">{{v.postdate}}</span> by <span style="color:red;">{{v.author}}</span> in <span style="color:red;">{{v.categories}}</span></div>
     </div>
     <div id="pageNavigation">
-        <input v-if="d.currentPage != 1" type="button" value="<< Previous"><span class="pageNumber">Page {{d.currentPage}} of {{d.totalPages}}</span><input v-if="d.currentPage != d.totalPages" type="button" value="Next >>">
+        <span v-if="d.currentPage != 1">&lt;&lt;&nbsp;<a v-bind:href="d.previousLink" style="color:red;font-weight:bold;text-decoration: underline;">Previous</a>&nbsp;</span>
+        <span class="pageNumber">Page {{d.currentPage}} of {{d.totalPages}}</span>
+        <span v-if="d.currentPage != d.totalPages">&nbsp;<a v-bind:href="d.nextLink" style="color:red;font-weight:bold;text-decoration: underline;">Next</a>&nbsp;&gt;&gt;</span>
     </div>
 </div>

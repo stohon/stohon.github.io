@@ -1,7 +1,7 @@
 [
     { "name": "Installing Guacamole on Linux HTML5 Remote Access", "url" : "./posts/page.html", "categories" : "Azure, Linux", "author" : "Ben Stohon", "postdate": "May 14, 2018", 
     "description" : "Now that guacamole is setup you will need to connect to it using port 8080. Go back into portal.azure.com and remove the inbound SSH 22 port and add port 8080. With port 8080 open you can now hit the guacamole site." },
-    { "name": "Add Users to Groups or Shares Across Machines Using PowerShell", "url" : "./posts/page.html", "categories" : "C#", "author" : "Ben Stohon", "postdate": "May 14, 2018", 
+    { "name": "Add Users to Groups or Shares Across Machines Using PowerShell", "url" : "./posts/page.html", "categories" : "C#, Azure", "author" : "Ben Stohon", "postdate": "May 14, 2018", 
     "description" : "Now that guacamole is setup you will need to connect to it using port 8080. " },
     { "name": "Download CSV File and Save to SQL Server", "url" : "./posts/page.html", "categories" : "PowerShell, MSLogParser", "author" : "Ben Stohon", "postdate": "May 14, 2018", 
     "description" : "Go back into portal.azure.com and remove the inbound SSH 22 port and add port 8080. With port 8080 open you can now hit the guacamole site." }

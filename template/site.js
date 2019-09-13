@@ -1,7 +1,6 @@
 var siteData = {
     "rootURL"       : location.href.split('stohon.github.io')[0] + "stohon.github.io",
-    "header"        : [{"type":"link",  "url":"https://fonts.googleapis.com/css?family=Muli"},
-                       {"type":"link",  "url": "{rootURL}/template/site.css"},
+    "header"        : [{"type":"link",  "url": "{rootURL}/template/site.css"},
                        {"type":"link",  "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs.min.css"},
                        {"type":"script","url":"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
                        {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"},
