@@ -44,6 +44,8 @@ function headerLoaded() {
         var pageContent = $("body").html();
         $("body").hide();
         $("body").html(data);
+        //pageContent = pageContent.replace("{{code1}}", "<script src='https://gist.github.com/stohon/a22ad5745d81c410a2c54835fff67144.js'></script>");
+        
         $("#content").html(pageContent);
         (typeof pageLoad === "function") ? pageLoad(createVue) : createVue();
     });
@@ -52,7 +54,7 @@ function headerLoaded() {
 function createVue() {
     $("#pageContent").show();
     var vue = new Vue({ el: '#app', data: { d: siteData } });
-    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+    //$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
     $("body").show();
-    //if (typeof vueLoaded === "function") vueLoaded();
+    if (typeof vueLoaded === "function") vueLoaded();
 }
