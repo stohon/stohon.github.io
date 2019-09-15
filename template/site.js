@@ -36,13 +36,19 @@ for(i=0; i < siteData.header.length; i++) {
         case 'link':   
             el.rel = 'stylesheet';
             el.href = siteData.getRelativeURL(siteData.header[i].url); 
+            el.onload = function() { if (++onloadCount == siteData.header.length) { headerLoaded(); }};
             break;
         case 'script': 
             el.type = 'text/javascript'; 
-            el.src  = siteData.getRelativeURL(siteData.header[i].url);  
+            el.src  = siteData.getRelativeURL(siteData.header[i].url); 
+            el.onload = function() { if (++onloadCount == siteData.header.length) { headerLoaded(); }}; 
             break; 
+        case 'meta':
+            el.name = siteData.header[i].name;
+            el.content = siteData.header[i].content;
+            break;
     } 
-    el.onload = function() { if (++onloadCount == siteData.header.length) { headerLoaded(); }};
+    
     document.getElementsByTagName('head')[0].appendChild(el);
 }
 
@@ -67,5 +73,6 @@ function createVue() {
             $(val).html(data.div); 
         });
     });
+    $("head").append("<meta name='google-site-verification' content='Y1DkIqfrOiXYxwbL9Jr_9HxFKg13oZVKaJj1fpIXuCM' />");
     $("body").show();
 }
