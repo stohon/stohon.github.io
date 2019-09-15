@@ -1,15 +1,13 @@
 var siteData = {
     "rootURL"       : location.href.split('stohon.github.io')[0] + "stohon.github.io",
     "header"        : [{"type":"link",  "url": "{rootURL}/template/site.css"},
-                       {"type":"link",  "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs.min.css"},
-                       {"type":"script","url":"https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
-                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"},
-                       {"type":"script","url":"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"}],
+                       {"type":"script","url": "{rootURL}/pages.js"},
+                       {"type":"script","url": "{rootURL}/categories.js"},
+                       {"type":"script","url": "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
+                       {"type":"script","url": "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"}],
     "siteTitle"     : "Stohon's <span style='color:black;'>Blogs</span>",
     "siteFooter"    : "Copyright - Stohon's Blogs - Hosted with Simple HTML Blog",
-    "categories"    : ["Active Directory","AngularJS","ASP.NET","Azure","C#",
-                       "Javascript","JQuery","Linux","MS LogParser","PowerShell","SQL Server"],
-    "pages"         : [{ "name": "About Me", "url": "./pages/aboutme.html" }],
+    "categories"    : [], "pages" : [],
     getRelativeURL  : function (url) { return url.replace("{rootURL}", this.rootURL); },
     getUrlVars      : function () {
                         var vars = [], hash;
@@ -21,6 +19,13 @@ var siteData = {
     getQSCategory   : function () { return siteData.getUrlVars()["category"]; },
     getQSPage       : function () { return siteData.getUrlVars()["page"]; }
 };
+
+function createStylesheetLink (url) {
+    el = document.createElement("link");
+    el.rel = 'stylesheet';
+    el.href = siteData.getRelativeURL(url);
+    document.getElementsByTagName('head')[0].appendChild(el);
+}
 
 var onloadCount = 0;
 for(i=0; i < siteData.header.length; i++) {
@@ -40,12 +45,12 @@ for(i=0; i < siteData.header.length; i++) {
 }
 
 function headerLoaded() {
+    siteData.pages = sitePages;
+    siteData.categories = siteCategories;
     $.get(siteData.getRelativeURL("{rootURL}/template/site.html"), function (data) { 
         var pageContent = $("body").html();
         $("body").hide();
         $("body").html(data);
-        //pageContent = pageContent.replace("{{code1}}", "<script src='https://gist.github.com/stohon/a22ad5745d81c410a2c54835fff67144.js'></script>");
-        
         $("#content").html(pageContent);
         (typeof pageLoad === "function") ? pageLoad(createVue) : createVue();
     });
@@ -54,7 +59,11 @@ function headerLoaded() {
 function createVue() {
     $("#pageContent").show();
     var vue = new Vue({ el: '#app', data: { d: siteData } });
-    //$('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+    $("[gistjson]").each(function (ind, val) {
+        $.getJSON($(val).attr("gistjson") + "?callback=?", function(data) { 
+            createStylesheetLink(data.stylesheet);
+            $(val).html(data.div); 
+        });
+    });
     $("body").show();
-    if (typeof vueLoaded === "function") vueLoaded();
 }

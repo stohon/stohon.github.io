@@ -1,12 +1,4 @@
 <script src="../template/site.js"></script>
-<script type="text/javascript">
-function pageLoad(loadCompleteCallback) { loadCompleteCallback(); }
-function vueLoaded() { 
-    $("[gistjson]").each(function (ind, val) {
-        $.get($(val).attr("gistjson"), function(data) { alert(data.div); });
-    });  
- } 
-</script>
 <div id="pageContent">
 <h1>Installing Guacamole on Linux HTML5  Remote Access</h1>
 <p>After guac-install.sh runs it will display the URL and default admin account. guacadmin:guacadmin and http://localhost:8080/guacamole.</p>

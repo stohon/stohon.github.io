@@ -4,7 +4,7 @@
         <div id="content" class="content" ></div>
         <div class="menu" valign="top">
             <h3>Pages</h3>
-            <ul><li v-for="(v,i,z) in d.pages"><a href="#">{{v.name}}</a></li></ul>
+            <ul><li v-for="(v,i,z) in d.pages"><a v-bind:href="d.rootURL + '/' + v.url">{{v.name}}</a></li></ul>
             <h3>Categories</h3>
             <ul><li v-for="(v,i,z) in d.categories"><a v-bind:href="d.rootURL + '/index.html?category=' + v">{{v}}</a></li></ul>
         </div>

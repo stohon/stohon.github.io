@@ -1,0 +1,12 @@
+<div id="pageContent">
+    <div v-for="(v,i,z) in d.posts">
+        <h1><a v-bind:href="v.url">{{v.name}}</a></h1>
+        <div v-html="v.description"></div>
+        <div style="margin-bottom:15px;margin-top:8px;font-size:13px;color:#707070;font-weight:bold;">Posted on <span style="color:red;">{{v.postdate}}</span> by <span style="color:red;">{{v.author}}</span> in <span style="color:red;">{{v.categories}}</span></div>
+    </div>
+    <div id="pageNavigation">
+        <span v-if="d.currentPage != 1">&lt;&lt;&nbsp;<a v-bind:href="d.previousLink" style="color:red;font-weight:bold;text-decoration: underline;">Previous</a>&nbsp;</span>
+        <span class="pageNumber">Page {{d.currentPage}} of {{d.totalPages}}</span>
+        <span v-if="d.currentPage < d.totalPages">&nbsp;<a v-bind:href="d.nextLink" style="color:red;font-weight:bold;text-decoration: underline;">Next</a>&nbsp;&gt;&gt;</span>
+    </div>
+</div>

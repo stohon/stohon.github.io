@@ -20,9 +20,12 @@ function pageLoad(loadCompleteCallback) {
 
         pageData.previousLink = "index.html" + getPrevNavQueryString(pageData.currentPage, categoryVal);
         pageData.nextLink = "index.html" + getNextNavQueryString(pageData.currentPage, categoryVal, pageData.totalPages);
-        var vuePage = new Vue({ el: '#pageNavigation', data: { d: pageData } });
-    
-        loadCompleteCallback();
+
+        $.get(siteData.getRelativeURL("{rootURL}/template/postlist.html"), function (data) { 
+            $("#content").html(data);
+            var vuePage = new Vue({ el: '#pageNavigation', data: { d: pageData } });
+            loadCompleteCallback();
+        });
     });
  }
  function getPrevNavQueryString (page, cat) {
