@@ -1,6 +1,7 @@
 var siteData = {
     "rootURL"       : location.href.split('stohon.github.io')[0] + "stohon.github.io",
-    "header"        : [{"type":"link",  "url": "{rootURL}/template/site.css"},
+    "header"        : [{"type":"script","url": "https://www.googletagmanager.com/gtag/js?id=UA-147964124-1"},
+                       {"type":"link",  "url": "{rootURL}/template/site.css"},
                        {"type":"script","url": "{rootURL}/pages.js"},
                        {"type":"script","url": "{rootURL}/categories.js"},
                        {"type":"script","url": "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
@@ -45,6 +46,13 @@ for(i=0; i < siteData.header.length; i++) {
 }
 
 function headerLoaded() {
+
+    window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-147964124-1');
+
     siteData.pages = sitePages;
     siteData.categories = siteCategories;
     $.get(siteData.getRelativeURL("{rootURL}/template/site.html"), function (data) { 
