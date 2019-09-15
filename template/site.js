@@ -6,7 +6,8 @@ var siteData = {
                        {"type":"script","url": "{rootURL}/pages.js"},
                        {"type":"script","url": "{rootURL}/categories.js"},
                        {"type":"script","url": "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"},
-                       {"type":"script","url": "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"}],
+                       {"type":"script","url": "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"},
+                       {"type":"meta"  ,"name": "google-site-verification", "content": "Y1DkIqfrOiXYxwbL9Jr_9HxFKg13oZVKaJj1fpIXuCM"}],
     "siteTitle"     : "Stohon's <span style='color:black;'>Blogs</span>",
     "siteFooter"    : "Copyright - Stohon's Blogs - Hosted with Simple HTML Blog",
     "categories"    : [], "pages" : [],
@@ -46,6 +47,7 @@ for(i=0; i < siteData.header.length; i++) {
         case 'meta':
             el.name = siteData.header[i].name;
             el.content = siteData.header[i].content;
+            if (++onloadCount == siteData.header.length) { headerLoaded(); }
             break;
     } 
     
@@ -73,6 +75,5 @@ function createVue() {
             $(val).html(data.div); 
         });
     });
-    $("head").append("<meta name='google-site-verification' content='Y1DkIqfrOiXYxwbL9Jr_9HxFKg13oZVKaJj1fpIXuCM' />");
     $("body").show();
 }
