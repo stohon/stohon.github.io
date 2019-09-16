@@ -10,5 +10,6 @@ siteCategories =
 "Linux",
 "MS LogParser",
 "PowerShell",
-"SQL Server"
+"SQL Server",
+"Vuejs"
 ]

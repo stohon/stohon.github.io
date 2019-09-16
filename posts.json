@@ -1,8 +1,11 @@
 [
-{ "name": "HTML5 RDP to Linux on Azure", "url" : "./posts/html5-rdp-to-linux-on-azure.html", "categories" : "Azure, Linux", "author" : "Ben Stohon", "postdate": "2018-08-22", 
-"description" : "This write up will provide the steps required to install guacamole on a linux VM running in Azure. Guacamole is a web app that provides the ability to remote desktop into machines on your network through a HTML 5 browser." },
-{ "name": "Add Users to Groups or Shares Across Machines Using PowerShell", "url" : "./posts/page.html", "categories" : "C#, Azure", "author" : "Ben Stohon", "postdate": "May 14, 2018", 
-"description" : "Now that guacamole is setup you will need to connect to it using port 8080. " },
-{ "name": "Download CSV File and Save to SQL Server", "url" : "./posts/page.html", "categories" : "PowerShell, MSLogParser", "author" : "Ben Stohon", "postdate": "May 14, 2018", 
-"description" : "Go back into portal.azure.com and remove the inbound SSH 22 port and add port 8080. With port 8080 open you can now hit the guacamole site." }
+{ "name": "HTML5 RDP to Linux on Azure", "url" : "./posts/html5-rdp-to-linux-on-azure.html", 
+    "categories" : "Azure, Linux", "author" : "Ben Stohon", "postdate": "2018-08-22", 
+    "description" : "This write up will provide the steps required to install guacamole on a linux VM running in Azure. Guacamole is a web app that provides the ability to remote desktop into machines on your network through a HTML 5 browser." },
+{ "name": "Dynamically Render Using Vue.js", "url" : "./posts/dynamically-render-using-vue-js.html", 
+    "categories" : "Vuejs", "author" : "Ben Stohon", "postdate": "2018-04-14", 
+    "description" : "This is an example of using vue.js to load and render new content dynamically. This is particularly useful when you would like to update the layout of your data without including the markup for the layout on the page itself." },
+{ "name": "PSWeb – PowerShell Web Console", "url" : "./posts/psweb-powershell-web-console.html", 
+    "categories" : "ASP.NET, C#, PowerShell, Vuejs", "author" : "Ben Stohon", "postdate": "2018-04-13", 
+    "description" : "PSWeb is a single page web application that lets users select PowerShell scripts to view and execute from a remote server. The user can only modify parameters of the script and then view the result in standard PowerShell format, HTML or JSON." }
 ]

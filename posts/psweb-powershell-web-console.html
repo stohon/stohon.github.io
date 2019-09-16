@@ -1,0 +1,42 @@
+<script src="../template/site.js"></script>
+<div id="pageContent">
+<h1>PSWeb - PowerShell Web Console</h1>
+<p>PSWeb is a single page web application that lets users select PowerShell scripts to view and execute from a remote server. The user can only modify parameters of the script (highlighted yellow) and then view the result in standard PowerShell format, HTML or JSON.</p>
+<img src="./images/psweb-powershell-web-console/PSConsole.png" alt="" width="680" height="383" />
+<p>The PSWeb application code can be found on github at: <a href="https://github.com/stohon/PSWeb">https://github.com/stohon/PSWeb</a></p>
+<p>The application also works with the github repository: <a href="https://github.com/stohon/PSWebShare">https://github.com/stohon/PSWebShare</a>. PSWebShare is a collection of PowerShell scripts and example files that demonstrate how to use PSWeb.</p>
+<p>The remainder of this blog will be to explain the project files, high level application flow and setup.</p>
+<h3><strong>Project Files</strong></h3>
+<p>PSWeb and PSWebShare project files are shown below. The PSWeb project contains all the required files to run the application in an IIS web site. The PSWebShare project are powershell files that the PSWeb application will use as content.</p>
+<p><img class="alignnone wp-image-179" src="http://stohon.com/wp-content/uploads/2018/05/CodeFiles.png" alt="" width="445" height="318" srcset="http://stohon.com/wp-content/uploads/2018/05/CodeFiles.png 574w, http://stohon.com/wp-content/uploads/2018/05/CodeFiles-300x215.png 300w, http://stohon.com/wp-content/uploads/2018/05/CodeFiles-250x179.png 250w" sizes="(max-width: 445px) 100vw, 445px" /></p>
+<p><strong>PSWeb</strong> includes highlight.js for code highlighting in the browser (css/xcode.css and js/highlight.pack.js) this project can be found on github. It also includes vue.js and axious.min.js. Vue.js is a rendering engine in javascript and axios.min.js is a javascript ajax library.</p>
+<p>The core project files are: css/main.css, js/main.js, console.aspx, service.aspx.cs and web.config.</p>
+<p>Console.aspx is the home page of the application and contains teh HTML markup for the site. Service.aspx.cs is C# server side code that acts as a service for the application. Main.js is the javascript writting for vue.js that populates and renders data within the console.aspx page.</p>
+<p><strong>PSWebShare</strong> contains two directories, logs and PowerShell. The logs directory is an empty directory that will be used to output log files that are generated after each script execution. The PowerShell directory is where you will store all of your custom PowerShell scripts. The application will scan this directory for all sub directories allowing and display files that are included in these directories only. All other files that are not in a root level sub directory will not be visible in the console.</p>
+<h3><strong>Application Flow</strong></h3>
+<p>When the console.aspx page loads it calls the service.aspx page to request the PowerShell folders and folder files as a JSON response.  It then populates the menu item drop downs. The drop downs will default to the &#8220;PowerShell Console&#8221; folder and the &#8220;Home.html&#8221; file. Each time the folder is changed within the drop down the file will also default to &#8220;Home.html&#8221; if it exists within that folder. The Home.html page allows you to create a landing page for each folder to provide details regarding the scripts within the folder. If Home.html does not exist it will load the first script in the list.</p>
+<p>Once the user selects a script they can then update parameters of that script. Below is an example of parameters for the &#8220;write-in write-out.ps1&#8221; example script included in PSWebShare.</p>
+<p><img class="alignnone wp-image-184" src="http://stohon.com/wp-content/uploads/2018/05/params.jpg" alt="" width="240" height="137" srcset="http://stohon.com/wp-content/uploads/2018/05/params.jpg 281w, http://stohon.com/wp-content/uploads/2018/05/params-250x142.jpg 250w" sizes="(max-width: 240px) 100vw, 240px" /></p>
+<p>Notice the values are highlighted yellow, indicating that the values can be changed. The value can be updated with any valid JSON markup. When the user clicks Execute the JSON will be sent to the service.aspx to be added as a variable to the PowerShell script to be executed.</p>
+<p>The PowerShell script interprets the JSON via the file WebUtil.ps1 and function write-in within the PSWebShare project. WebUtil.ps1 also contains the write-out functions that are required to pass data back to the console application.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+<div># The WebUtil.ps1 script must be included in all of the PowerShell scripts that run in this application.
+</br>. "$env:PSConsole\powershell\WebUtil.ps1"</div>
+<p>In the above example an environment variable is used to point to the location of PSWebShare. This is not necessary and could contain a hard coded path. The environment variable was used to provide a way to setup the application on different environments without having to rewrite all the PowerShell scripts that contained hard coded reference paths.</p>
+<p>Once PowerShell write-in function is called with the JSON parameters it converts each root level property into a PowerShell variable using the ConvertFrom-Json function. The value is then assigned to a variable as $variablename so it can be used within the script as a traditional variable reference.</p>
+<p>To output data from a script to the console you must use the write-out functions. Write-out accepts the variable to output and an optional name for the variable. The name is used as a reference to the object on the client. The write-out function packages the object data into a new object called OutputToWeb which is defined in WebUtil.ps1. Only values outputted through OutputToWeb will be processed within the console application.</p>
+<p>After the script completes, all resulting OutputToWeb objects are returned to the console application to be displayed in the results window. The results can be display as standard PowerShell output display, HTML or JSON.</p>
+<h3><strong>Application Setup</strong></h3>
+<ol>
+<li>Ensure IIS is setup with windows authentication.</li>
+<li>Create an application within IIS.</li>
+<li>Copy all PSWeb files into the root directory of the new IIS application.</li>
+<li>Disable Anonymous Authentication and enable Windows Authentication on IIS application. The application will work without Windows authentication but will be open to all.</li>
+<li>Update UsernameList in web.config. If left blank the application will ignore this setting and rely on security settings in IIS for access. This setting is a comma delimited list of domain/username. Do not leave blank spaces.</li>
+<li>Create a new directory (PSWebShare) to store all the common files, logs, powershell scripts and additional configuration files. See the repo PSWebShare. Download the PSWebShare repo to this directory.</li>
+<li>Once the directory is created and files downloaded, update the variable &#8220;PSConsoleShareLocation&#8221; in the web.config file with the directory path. This path can be a local path, c:\path or a share location \machine\path. You can run PSWeb on mulitple servers and have all web servers point to the same location using a share location.</li>
+<li>Create an environment variable to the new share path. This step is optional. Creating an environment variable allows you to write PowerShell includes within your scripts without hard coding the path to ps1 files. Command line: setx PSConsole &#8220;\mysharelocation&#8221;.</li>
+<li>Update web.config file variable: &#8220;PSConsoleShareName&#8221; with the name of the environment variable name if one is created. Running a PowerShell script from a command line or ISE the environment variable is interpreted correctly. However, running a script from this web application, environment variables are not interpreted correctly, the reference is instead replaced before execution with the actual path location set in the web.config. The application looks for $env: within all scripts and replaces them with actual paths.</li>
+<li>Set LoggingEnabled to true or false. The log location is yourshare\logs.</li>
+<li>Optional: you can create a virtual directory under the web application that points to the share location. This will allow you to reference log files or other output files from the application output window results.</li>
+</ol>
+</div>
