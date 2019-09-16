@@ -1,7 +1,7 @@
 <div id="pageContent">
     <div v-for="(v,i,z) in d.posts">
         <h1><a v-bind:href="v.url">{{v.name}}</a></h1>
-        <div v-html="v.description"></div>
+        <div v-html="v.description" style="text-align:justify;"></div>
         <div class="postDetail">Posted on <span style="color:red;">{{v.postdate}}</span> by <span style="color:red;">{{v.author}}</span> in <span style="color:red;">{{v.categories}}</span></div>
     </div>
     <div id="pageNavigation">
