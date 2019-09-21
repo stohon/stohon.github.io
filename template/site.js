@@ -1,6 +1,7 @@
 var siteData = {
     "rootURL"       : location.href.split('stohon.github.io')[0] + "stohon.github.io",
     "header"        : [{"type":"meta"  ,"name": "google-site-verification", "content": "Y1DkIqfrOiXYxwbL9Jr_9HxFKg13oZVKaJj1fpIXuCM"},
+                       {"type":"meta"  ,"name": "viewport", "content": "width=device-width, initial-scale=1"},
                        {"type":"script","url": "https://www.googletagmanager.com/gtag/js?id=UA-147964124-1"},
                        {"type":"script","url": "{rootURL}/template/googleanalytics.js"},
                        {"type":"link",  "url": "{rootURL}/template/site.css"},
