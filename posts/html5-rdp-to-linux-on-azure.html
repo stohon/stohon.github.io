@@ -14,7 +14,7 @@ The address will look something like yourname.region.cloudapp.azure.com.</p>
 </p>Next, to install guacamole and all prerequisites you will have to set up an inbound port to the VM for SSH port 22. 
 From the Networking tab for the VM add the rule for port 22.</p>
 
-<img src="./images/html5-rdp-to-linux-on-azure/AzurePorts.png"></img>
+<img src="./images/html5-rdp-to-linux-on-azure/AzurePorts.png" style="width: 100%; max-width: 800px; height:auto;"></img>
 
 </p>With the port open your can now remote in to SSH and install the following. 
 I used PuTTY to remote in, don’t forget the the username and password you created with the VM!</p>
@@ -34,7 +34,7 @@ I used PuTTY to remote in, don’t forget the the username and password you crea
 
 <p>To setup a RDP connection enter in the Name and select RDP for the connection.</p>
 
-<img src="./images/html5-rdp-to-linux-on-azure/EditRDPConnection.png"></img>
+<img src="./images/html5-rdp-to-linux-on-azure/EditRDPConnection.png" style="width: 100%; max-width: 300px; height:auto;"></img>
 
 <p>Next scroll down to Parameters. Enter localhost for the Hostname. 
     If you have more than one machine on the local network (in Azure virtual network) you could use this instance of guacamole to connect to each machine by creating a connection for each and providing the local machine address for hostname. 
@@ -45,7 +45,7 @@ I used PuTTY to remote in, don’t forget the the username and password you crea
     If you don't provide it here then you will be prompted by the OS when RDPing in. 
     If you do provide it you will be automatically logged into the OS. Click save.</p>
 
-<img src="./images/html5-rdp-to-linux-on-azure/RDPParameters.png"></img>
+<img src="./images/html5-rdp-to-linux-on-azure/RDPParameters.png" style="width: 100%; max-width: 500px; height:auto;"></img>
 
 <p>Navigate to the Home page and double click the connection to log in.</p>
 
