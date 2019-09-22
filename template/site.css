@@ -7,7 +7,7 @@ h1 a:hover { color:#000000; cursor:pointer; text-decoration: underline; }
 li a { color:red; cursor:pointer; text-decoration: none; }
 ul { margin: 0px; border:0px; padding:0px;}
 ul, ol { margin-top:0.2em;margin-right:0px;margin-bottom:1em;margin-left:1.2em; }
-ul li { list-style: square; padding-bottom:4px; font-size: 18px; }
+ul li { list-style: square; padding-bottom:4px; font-size: 16px; }
 p { text-align: justify; }
 p a { color:cornflowerblue; }
 pre { font-size:16px; overflow: auto; border:1px solid #dadada; }
