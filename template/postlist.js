@@ -11,7 +11,7 @@ function pageLoad(loadCompleteCallback) {
             data = $.grep(data, function(n,i) { return n.categories.replace(" ","").split(',').includes(decodeURIComponent(categoryVal).replace(" ", "")); });
         }
         
-        var postsPerPage = 5;
+        var postsPerPage = 10;
         pageData.totalPages = Math.ceil(data.length / postsPerPage);
         var startSlice = (pageData.currentPage == 1) ? 0 : (pageData.currentPage - 1) * postsPerPage;
         data = data.slice(startSlice, startSlice + postsPerPage);
