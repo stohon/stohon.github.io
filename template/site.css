@@ -17,11 +17,11 @@ pre { font-size:16px; overflow: auto; border:1px solid #dadada; }
 .content { width:80%; float:left;padding-bottom:15px; }
 #pageContent { display:none; }
 .menu { width:20%; float:left;padding-left:35px; }
-#pageNavigation { margin-top:35px; color:red;font-weight:bold; }
+#pageNavigation { margin-top:35px; color:red;}
 input[type=button] { margin-right:10px;width:100px; font-size:18px; background-color: #eeeeee;}
-.pageNumber { color:#494949;font-size:14px; color:#707070; font-weight:bold; }
+.pageNumber { color:#494949;font-size:14px; color:#707070; }
 .navLink { color:red;font-weight:bold;text-decoration: underline; }
-.postDetail { margin-bottom:20px;margin-top:8px;font-size:14px;color:#707070;font-weight:bold; }
+.postDetail { margin-bottom:20px;margin-top:4px;font-size:14px;color:#707070; }
 .searchbox {
     display:block;
 margin:0 0 0.8em;
