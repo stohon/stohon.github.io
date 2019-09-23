@@ -1,7 +1,7 @@
 body { font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; margin-left: 10%; margin-right: 10%; font-size:16px; }
-h1 { font-size:22px; font-weight: bold; margin: 0px; }
-h2 { font-size:20px; font-weight: bold; margin: 0px; }
-h3 { font-size:18px; font-weight: bold; margin: 0px; margin-bottom:2px; }
+h1 { font-size:18px; font-weight: bold; margin: 0px; }
+h2 { font-size:17px; font-weight: bold; margin: 0px; }
+h3 { font-size:16px; font-weight: bold; margin: 0px; margin-bottom:2px; }
 a { color: #000000; cursor:pointer; text-decoration: none; }
 h1 a:hover { color:#000000; cursor:pointer; text-decoration: underline; }
 li a { color:red; cursor:pointer; text-decoration: none; }
@@ -13,7 +13,7 @@ p a { color:cornflowerblue; }
 pre { font-size:16px; overflow: auto; border:1px solid #dadada; }
 .header { padding-top: 15px; padding-bottom: 15px; font-family: Segoe UI,SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif; 
           font-size:3.2em; font-weight:bold; color:red; letter-spacing: -0.05em; text-shadow: 1px 1px 0px rgba(0,0,0,0.3); }
-.footer { clear:left;width:100%;text-align:center;padding:5px;border-top:1px solid #dadada; font-size:14px;  color:#555555;}
+.footer { clear:left;width:100%;text-align:center;padding:0px;border-top:1px solid #dadada; font-size:12px;  color:#555555;}
 .content { width:80%; float:left;padding-bottom:15px; }
 #pageContent { display:none; }
 .menu { width:20%; float:left;padding-left:35px; }

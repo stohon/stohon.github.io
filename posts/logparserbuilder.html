@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        textarea { border:1px solid #909090; }
+        input { border:1px solid #909090; }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script>
+        angular.module('pageApp', []).config(function ($sceProvider) { $sceProvider.enabled(false); })
+            .controller('pageController', ['$scope', '$http', function ($scope, $http, $compile) {
+
+                $scope.logParser = {
+                    selectedQueryIndex: 0,
+                    selectedEnvironment: 0,
+                    selectedOutputType: 0,
+                    logTimes: {
+                        setNewDefaultTimes: function (hour) {
+                            this.start = new Date((new Date()).getFullYear(), (new Date()).getMonth(), (new Date()).getDate(), (new Date()).getHours(), (new Date()).getMinutes());
+                            this.end = new Date((new Date()).getFullYear(), (new Date()).getMonth(), (new Date()).getDate(), (new Date()).getHours() - hour, (new Date()).getMinutes());
+                            $scope.logParser.logTimes.setULSFilenameDatetimeList();
+                        },
+                        start: null,
+                        end: null,
+                        setLogWindowByHours: function (hoursDiff) { this.start.setHours(this.end.getHours() - hoursDiff); },
+                        getHourlyDiff: function () { return Math.abs(this.end - this.start) / 36e5; },
+                        ulsFilenameDatetimeList: null,
+                        padUnit: function (value) { if (value.toString().length == 1) return "0" + value; else return value; },
+                        setULSFilenameDatetimeList: function () {
+                            this.ulsFilenameDatetimeList = new Array();
+                            var endAt = $scope.logParser.logTimes.end;
+                            for (hourIndex = 0; hourIndex < $scope.logParser.logTimes.getHourlyDiff(); hourIndex++) {
+                                var dataString = endAt.getFullYear().toString() +
+                                                $scope.logParser.logTimes.padUnit(endAt.getMonth() + 1).toString() +
+                                                $scope.logParser.logTimes.padUnit(endAt.getDate()).toString() + "-" +
+                                                $scope.logParser.logTimes.padUnit(endAt.getHours() - hourIndex).toString() + "*";
+                                this.ulsFilenameDatetimeList.push({ name: dataString });
+                            }
+                            return this.ulsFilenameDatetimeList;
+                        },
+                        eventLogTimeFormat: function (inDatetime) {
+                            return inDatetime.getFullYear().toString() + "-" +
+                                   $scope.logParser.logTimes.padUnit(inDatetime.getMonth() + 1).toString() + "-" +
+                                   $scope.logParser.logTimes.padUnit(inDatetime.getDate()).toString() + " " +
+                                   $scope.logParser.logTimes.padUnit(inDatetime.getHours()).toString() + ":" +
+                                   $scope.logParser.logTimes.padUnit(inDatetime.getMinutes()).toString() + ":00";
+                        }
+                    },
+                    queryTypes: [
+                        {
+                            name: "ULS",
+                            description: "SharePoint Unified Logging Service (ULS) Logs",
+                            sourceType: "TSV",
+                            fields: [
+                                { selected: true, name: "Filename" },
+                                { selected: true, name: "RowNumber" },
+                                { selected: true, name: "ï»¿Timestamp as Timestamp" },
+                                { selected: true, name: "Process" },
+                                { selected: true, name: "TID" },
+                                { selected: true, name: "Area" },
+                                { selected: true, name: "Category" },
+                                { selected: true, name: "EventID" },
+                                { selected: true, name: "Level" },
+                                { selected: true, name: "Message" },
+                                { selected: true, name: "Correlation" }
+                            ]
+                        },
+                        {
+                            name: "Application",
+                            description: "Event Viewer Application Logs",
+                            sourceType: "EVT",
+                            fields: [
+                                { selected: true, name: "EventLog" },
+                                { selected: true, name: "RecordNumber" },
+                                { selected: true, name: "TimeGenerated" },
+                                { selected: true, name: "TimeWritten" },
+                                { selected: true, name: "EventID" },
+                                { selected: true, name: "EventType" },
+                                { selected: true, name: "EventTypeName" },
+                                { selected: true, name: "EventCategory" },
+                                { selected: true, name: "EventCategoryName" },
+                                { selected: true, name: "SourceName" },
+                                { selected: true, name: "Strings" },
+                                { selected: true, name: "ComputerName" },
+                                { selected: true, name: "SID" },
+                                { selected: true, name: "Message" },
+                                { selected: true, name: "Data" }
+                            ]
+                        }
+                    ],
+                    environments: [
+                        {
+                            name: "PROD", computers: [
+                                { selected: true, name: "COMPUTER01" },
+                                { selected: true, name: "COMPUTER02" },
+                                { selected: true, name: "COMPUTER03" },
+                                { selected: true, name: "COMPUTER04" },
+                                { selected: false, name: "COMPUTER05" }
+                            ]
+                        },
+                        {
+                            name: "QA", computers: [
+                                { selected: true, name: "COMPUTER01" },
+                                { selected: true, name: "COMPUTER02" },
+                                { selected: false, name: "COMPUTER03" },
+                                { selected: false, name: "COMPUTER04" }
+                            ]
+                        },
+                        {
+                            name: "DEV", computers: [
+                                { selected: true, name: "COMPUTER01" },
+                                { selected: false, name: "COMPUTER02" }
+                            ]
+                        }
+                    ],
+                    outputTypes: [
+                        { name: "DATAGRID" },
+                        { name: "CSV", fileName: "C:\\results.csv" },
+                        { name: "SQL", server: "localhost", database: "DBName", tableName: "TableName",
+                          driver: "SQL Server", username: "UserName", password: "Password", createTable: "ON" }
+                    ],
+                    customWhereClause: ""
+                }
+
+		        $scope.$watch('logParser.logTimes.start', function () {
+		            $scope.logParser.logTimes.setULSFilenameDatetimeList();
+		        });
+
+		        $scope.$watch('logParser.logTimes.end', function () {
+		            $scope.logParser.logTimes.setULSFilenameDatetimeList();
+		        });
+
+		        $scope.setComputers = function () {
+		            $scope.logParser.environments = $.parseJSON($("#computerJSON").text());
+		            $("#ddlEnvironment").val($scope.logParser.selectedEnvironment);
+		        }
+
+		        $scope.executeQuery = function () {
+                    var query = $('#query').text().replace(/\r?\n|\r/g, '');
+		            WshShell = new ActiveXObject("WScript.Shell");
+                    WshShell.Run("%comspec% /k LogParser.exe " + query.replace("LOGPARSER", ""), 1, true);
+                }
+
+		        $(document).ready(function () {
+                    $("#ddlQueryTypes").val($scope.logParser.selectedQueryIndex);
+                    $("#ddlOutputType").val($scope.logParser.selectedOutputType);
+                    $("#ddlEnvironment").val($scope.logParser.selectedEnvironment);
+                    $scope.logParser.logTimes.setNewDefaultTimes(2);
+                    $("#computerJSON").html(JSON.stringify(angular.fromJson(angular.toJson($scope.logParser.environments)), null, 1));
+                    $scope.$apply();
+                });
+            }]);
+
+    </script>
+</head>
+<body style="font-size:12px;">
+    <div ng-app="pageApp">
+        <div ng-controller="pageController">
+            <div style="padding:5px;">
+                <b>QUERY TYPE:</b>
+                <select style="width:400px;" id="ddlQueryTypes" ng-model="logParser.selectedQueryIndex">
+                    <option ng-repeat="queryType in logParser.queryTypes" ng-value="$index">{{queryType.description}}</option>
+                </select>
+            </div>
+            <div style="float:left;padding:5px;">
+                <b>FIELDS</b><br />
+                <div ng-repeat="item in logParser.queryTypes[logParser.selectedQueryIndex].fields">
+                    <input type="checkbox" ng-model="item.selected" />{{item.name}}
+                </div>
+            </div>
+            <div style="float:left;padding:5px;">
+                <b>COMPUTERS</b><br />
+                <select id="ddlEnvironment" style="width:150px;" ng-model="logParser.selectedEnvironment">
+                    <option ng-repeat="item in logParser.environments" ng-value="$index">{{item.name}}</option>
+                </select><br />
+                <div ng-repeat="item in logParser.environments[logParser.selectedEnvironment].computers">
+                    <input type="checkbox" ng-model="item.selected" />{{item.name}}
+                </div>
+            </div>
+            <div style="float:left;padding:5px;">
+                <b>TIME</b><br/>
+                Start:<input type="datetime-local" ng-model="logParser.logTimes.start" style="width:200px;" /><br/>
+                End:&nbsp;<input type="datetime-local" ng-model="logParser.logTimes.end" style="width:200px;" />
+                <br /><br />
+                <b>APPEND WHERE OR GROUP BY</b><br />
+                <textarea ID="customWhereClause" cols="30" rows="10" ng-model="logParser.customWhereClause"></textarea>
+            </div>
+            <div style="float:left;padding:5px;">
+                <b>OUTPUT</b><br />
+                <select id="ddlOutputType" ng-model="logParser.selectedOutputType" style="width:200px;">
+                    <option ng-repeat="outputType in logParser.outputTypes" ng-value="$index">{{outputType.name}}</option>
+                </select>
+                <br />
+                <div ng-if="logParser.outputTypes[logParser.selectedOutputType].name == 'CSV'">
+                    <br />File Name:<br /><input style="width:200px;" type="text" ng-model="logParser.outputTypes[logParser.selectedOutputType].fileName" />
+                </div>
+                <div ng-if="logParser.outputTypes[logParser.selectedOutputType].name == 'SQL'">
+                    <br />Server:<br /><input style="width:200px;" type="text" ng-model="logParser.outputTypes[logParser.selectedOutputType].server" /></td>
+                    <br />Database:<br /><input style="width:200px;" type="text" ng-model="logParser.outputTypes[logParser.selectedOutputType].database" /></td>
+                    <br />Table Name:<br /><input style="width:200px;" type="text" ng-model="logParser.outputTypes[logParser.selectedOutputType].tableName" /></td>
+                    <br />Username:<br /><input style="width:200px;" type="text" ng-model="logParser.outputTypes[logParser.selectedOutputType].username" /></td>
+                    <br />Password:<br /><input style="width:200px;" type="text" ng-model="logParser.outputTypes[logParser.selectedOutputType].password" /></td>
+                </div>
+            </div>
+            <div style="clear:both;"><b>LOGPARSER QUERY</b></div>
+            <div id="query" style="clear:both;display:block;padding-top:10px;" contenteditable="true">
+                LOGPARSER
+                "SELECT
+                <repeat ng-repeat="item in logParser.queryTypes[logParser.selectedQueryIndex].fields | filter: true">
+                    <if ng-if="$index > 0">, </if>{{item.name}}
+                </repeat>
+                <switch ng-switch="logParser.outputTypes[logParser.selectedOutputType].name">
+                    <when ng-switch-when="SQL">
+                        {{ " INTO " + logParser.outputTypes[logParser.selectedOutputType].tableName}}
+                    </when>
+                    <when ng-switch-when="CSV">
+                        {{" INTO " + logParser.outputTypes[logParser.selectedOutputType].fileName }}
+                    </when>
+                </switch>
+                FROM
+                <repeat ng-repeat="computer in logParser.environments[logParser.selectedEnvironment].computers | filter: true">
+                    <if ng-if="$index > 0">, </if>
+                    <switch ng-switch="logParser.queryTypes[logParser.selectedQueryIndex].name">
+                        <when ng-switch-when="Application">
+                            {{ "\\\\" + computer.name + "\\Application"}}
+                        </when>
+                        <when ng-switch-when="ULS">
+                            <repeat ng-repeat="file in logParser.logTimes.ulsFilenameDatetimeList">
+                                <if ng-if="$index > 0">, </if>
+                                {{ "\\\\" + computer.name + "\\ULS\\" + computer.name + "-" + file.name + ".log" }}
+                            </repeat>
+                        </when>
+                    </switch>
+                </repeat>
+                <switch ng-switch="logParser.queryTypes[logParser.selectedQueryIndex].name">
+                    <when ng-switch-when="Application">
+                        {{ "WHERE TimeGenerated <= '" + logParser.logTimes.eventLogTimeFormat(logParser.logTimes.start) + "' AND TimeGenerated > '" + logParser.logTimes.eventLogTimeFormat(logParser.logTimes.end) + "'" }}
+                    </when>
+                </switch>
+                {{ " " + logParser.customWhereClause }}
+                "
+                {{" -i:" + logParser.queryTypes[logParser.selectedQueryIndex].sourceType }}
+                {{" -o:" + logParser.outputTypes[logParser.selectedOutputType].name }}
+                <switch ng-switch="logParser.outputTypes[logParser.selectedOutputType].name">
+                    <when ng-switch-when="SQL">
+                        {{
+    " -server:" + logParser.outputTypes[logParser.selectedOutputType].server +
+    " -database:" + logParser.outputTypes[logParser.selectedOutputType].database +
+    " -driver:\"" + logParser.outputTypes[logParser.selectedOutputType].driver + "\"" +
+    " -username:" + logParser.outputTypes[logParser.selectedOutputType].username +
+    " -password:" + logParser.outputTypes[logParser.selectedOutputType].password +
+    " -createTable:" + logParser.outputTypes[logParser.selectedOutputType].createTable
+                        }}
+                    </when>
+                </switch>
+            </div>
+            <div style="padding:5px;"><br /><b>COMPUTERS JSON</b><br />The json below can be modified to update the computers to select from. <br />Click <a href="#"  ng-click="setComputers()" >here</a> to populate changes.</div>
+            <div style="border:1px solid #909090;padding:5px;overflow:auto;width:400px; height:200px;">
+                <br /><pre id="computerJSON" contenteditable="true"></pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

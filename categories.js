@@ -8,7 +8,7 @@ siteCategories =
 "Javascript",
 "JQuery",
 "Linux",
-"MS LogParser",
+"LogParser",
 "PowerShell",
 "SQL Server",
 "Vuejs"

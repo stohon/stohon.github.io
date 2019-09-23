@@ -14,5 +14,13 @@
 { "name": "Download CSV File and Save to SQL Server", "url" : "./posts/download-csv-file-save-sql-server.html", 
     "categories" : "PowerShell, LogParser", "author" : "Ben Stohon", "postdate": "2018-02-22", 
     "description" : "Use PowerShell to download a cvs file from a remote server and dump results into a SQL Server table using LogParser." 
+},
+{ "name": "LogParser 2.2 – Query Builder – Part 2", "url" : "./posts/logparser-2-2-query-builder-part-2.html", 
+    "categories" : "LogParser", "author" : "Ben Stohon", "postdate": "2016-09-01", 
+    "description" : "I’m going to demonstrate building a small application in AngularJS that will provide a user friendly UI for quickly building LogParser queries." 
+},
+{ "name": "LogParser 2.2 - Query Builder - Part 1", "url" : "./posts/logparser-2-2-query-builder-part-1.html", 
+    "categories" : "LogParser", "author" : "Ben Stohon", "postdate": "2016-09-01", 
+    "description" : "LogParser - parsing csv or tab separated files and other log file formats using a SQL like syntax." 
 }
 ]
